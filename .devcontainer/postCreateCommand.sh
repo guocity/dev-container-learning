@@ -1,6 +1,6 @@
 #!/bin/bash
-set -e
-set -x
+set -e # exit immediately if a command exits with a non-zero status.
+set -x # enables debug mode, which prints each command to standard error before executing it.
 
 # Retry APT install up to 2 times
 for i in 1 2; do
@@ -13,6 +13,6 @@ for i in 1 2; do
     sudo apt --fix-broken install -y
     sudo apt-get install -y --fix-missing \
         libldap2-dev libsasl2-dev postgresql postgresql-client libpq-dev && break
-    echo "APT install failed, retrying ($i/3)..."
-    sleep 2
+    echo "APT install failed, retrying ($i/2)..."
+    sleep 1
 done
